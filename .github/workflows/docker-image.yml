@@ -21,7 +21,7 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag jsaraswathi/spinnaker-demo:latest
+      run: docker build . --file Dockerfile --tag jsaraswathi/spinnaker-demo:1.1
       
     - name: Docker Push
-      run: docker push jsaraswathi/spinnaker-demo:latest
+      run: docker push jsaraswathi/spinnaker-demo:1.1
