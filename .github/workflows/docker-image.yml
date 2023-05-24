@@ -17,12 +17,12 @@ jobs:
     - name: docker login
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        IMAGE_TAG: ${{ github.sha }}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag jsaraswathi/spinnaker-demo:$IMAGE_TAG
-      
-    - name: Docker Push
-      run: docker push jsaraswathi/spinnaker-demo:$IMAGE_TAG
+    - name: Build and push the Docker image 
+      env: 
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build . --file Dockerfile --tag jsaraswathi/spinnaker-demo:$IMAGE_TAG
+        docker push jsaraswathi/spinnaker-demo:$IMAGE_TAG
